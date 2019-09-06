@@ -48,8 +48,8 @@
     "cluster": "koa-cluster index.js",
     "forever": "forever start index.js",
     "forever:cluster": "forever start koa-cluster index.js",
-    "test": "mocha --require babel-register --recursive --exit",
-    "test:watch": "mocha --require babel-register --recursive --watch",
+    "test": "nyc mocha --require babel-register --recursive --exit",
+    "test:watch": "nyc mocha --require babel-register --recursive --watch",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
     "lint": "eslint src test"

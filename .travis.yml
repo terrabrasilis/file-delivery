@@ -3,4 +3,4 @@ node_js:
   - v12
 notifications:
   email: false
-# after_success: npm run coverage
+after_success: npm run coverage
