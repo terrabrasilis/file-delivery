@@ -1,6 +1,10 @@
 # deter-auth [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > 
 
+## NODE VERSION
+
+You should user Node version >= 12 
+
 ## Installation
 
 ```sh

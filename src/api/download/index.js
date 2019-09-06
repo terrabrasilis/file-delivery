@@ -1,5 +1,3 @@
-'use strict'
-
 import { index } from './download.controller'
 import router from 'koa-router'
 
