@@ -34,13 +34,14 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^6.2.0",
+    "nodemon": "^1.19.2",
     "npm-watch": "^0.6.0",
     "nyc": "^14.1.1",
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "start": "node index.js",
-    "serve": "node index.js",
+    "start": "./node_modules/.bin/nodemon index.js",
+    "serve": "./node_modules/.bin/nodemon index.js",
     "cluster": "koa-cluster index.js",
     "forever": "forever start index.js",
     "forever:cluster": "forever start koa-cluster index.js",
