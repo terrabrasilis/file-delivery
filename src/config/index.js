@@ -3,6 +3,7 @@
 const path = require('path')
 
 const config = {
+  secret: process.env.JWT_SECRET || 'jwt_secret',
   env: process.env.NODE_ENV || 'dev',
   health: path.normalize(__dirname + '../../'),
   ip: process.env.IP || 'localhost',
