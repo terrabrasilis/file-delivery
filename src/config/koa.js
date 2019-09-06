@@ -3,10 +3,12 @@
 import config from './index'
 import morgan from 'koa-morgan'
 import parser from 'koa-bodyparser'
+import cors from '@koa/cors'
 import compress from 'koa-compress'
 
 export default function configKoa (app) {
   app.use(compress())
+  app.use(cors())
   app.use(parser({
     strict: false
   }))
