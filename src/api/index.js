@@ -1,1 +1,4 @@
-export health from './health';
+import health from './health';
+import download from './download';
+
+export {health, download}
