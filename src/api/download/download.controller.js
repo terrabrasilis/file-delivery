@@ -3,16 +3,41 @@ import { constants } from '../utils'
 import path from 'path'
 const extname = path.extname
 
-export async function index (ctx, next) {
-  const user = ctx.state.user
-  const userType = user ? constants.ADMIN : constants.PUBLIC
+const Controller = {
 
-  const filePath = path.join(__dirname, './file-example.zip')
-  const fstat = fs.statSync(filePath)
+  index(ctx, next) {
+    const user = ctx.state.user
+    const userType = user ? constants.ADMIN : constants.PUBLIC
 
-  if (fstat.isFile()) {
-    ctx.type = extname(filePath)
-    ctx.append('user-type', userType)
-    ctx.body = fs.createReadStream(filePath)
+    const filePath = path.join(__dirname, './file-example.zip')
+    const fstat = fs.statSync(filePath)
+
+    if (fstat.isFile()) {
+      ctx.type = extname(filePath)
+      ctx.append('user-type', userType)
+      ctx.body = fs.createReadStream(filePath)
+    }
+  },
+
+  getFileBasedOnProfile(userType) {
+    switch (userType) {
+      case constants.ADMIN:
+        this.getPrivateFile()
+        break
+      case constants.PUBLIC:
+        this.getPublicFile()
+        break
+      default:
+    }
+  },
+
+  getPublicFile() {
+    return Utils.readDockerSecret(config.publicFilePath)
+  },
+
+  getPrivateFile() {
+    return Utils.readDockerSecret(config.privateFilePath)
   }
 }
+
+module.exports = { index: Controller.index }
