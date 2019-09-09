@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "dependencies": {
-    "@koa/cors": "2",
+    "@koa/cors": "3",
     "babel-eslint": "^10.0.3",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-runtime": "^6.23.0",
