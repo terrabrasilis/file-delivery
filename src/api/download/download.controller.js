@@ -10,13 +10,12 @@ const Controller = {
     const userType = user ? constants.ADMIN : constants.PUBLIC
 
     const filePath = path.join(__dirname, './file-example.zip')
-    const fstat = fs.statSync(filePath)
+    const FILE_IS_VALID = fs.statSync(filePath).isFile()
+    if (!FILE_IS_VALID) return ctx.body({error: 'Sorry, we had a problem serving the file'})
 
-    if (fstat.isFile()) {
-      ctx.type = extname(filePath)
-      ctx.append('user-type', userType)
-      ctx.body = fs.createReadStream(filePath)
-    }
+	ctx.type = extname(filePath)
+	ctx.append('user-type', userType)
+	ctx.body = fs.createReadStream(filePath)
   },
 
   getFileBasedOnProfile(userType) {
