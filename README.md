@@ -30,6 +30,56 @@ Getting the coverage report:
 $ yarn coverage
 ```
 
+# API Usage:
+
+## Download the file based on a public or admin access
+
+Gets the file based on the Json Web Token that are sent in the requisition.
+
+**URL** : `/download/:projectId/:frequency`
+
+**Path Params** : 
+
+	projectId: `['deter-cerrado', 'deter-amz']`	
+	frequency: `['monthly', 'daily']`
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+
+### Success Responses
+
+**Condition** : User gets the public file.
+
+**Code** : `200 OK`
+
+**Content** : `{type: public}`
+
+```json
+{
+    "type": "public"
+}
+
+```
+
+#### OR
+
+**Condition** : User gets the admin file.
+
+**Code** : `200 OK`
+
+**Content** : `{type: admin}`
+
+```json
+{
+    "type": "admin"
+}
+
+```
+
 ## License
 
 MIT © [Paulo Luan](http://terrabrasilis.dpi.inpe.br)
