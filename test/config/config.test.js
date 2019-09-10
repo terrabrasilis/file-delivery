@@ -5,7 +5,7 @@ import config from '../../src/config'
 
 describe('CONFIG:', () => {
   it('should get a basic environment variable', async () => {
-    expect(config.publicFilePath).to.be.eql('public_path')
-    expect(config.privateFilePath).to.be.eql('private_path')
+    expect(config.publicFilePath).to.be.eql('/home/pauloluan/sources/terrabrasilis/deter-auth/test/download/secret_public.txt')
+    expect(config.privateFilePath).to.be.eql('/home/pauloluan/sources/terrabrasilis/deter-auth/test/download/secret_private.txt')
   })
 })

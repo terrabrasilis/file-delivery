@@ -40,6 +40,7 @@
     "nodemon": "^1.19.2",
     "npm-watch": "^0.6.0",
     "nyc": "^14.1.1",
+    "rewiremock": "^3.13.7",
     "supertest": "^4.0.2"
   },
   "scripts": {
@@ -50,6 +51,7 @@
     "forever:cluster": "forever start koa-cluster index.js",
     "test": "nyc mocha --require babel-register --recursive --exit",
     "test:watch": "nyc mocha --require babel-register --recursive --watch",
+    "test:debug": "find ./test -name '*test.js' | NODE_ENV=test xargs ./node_modules/.bin/mocha --require babel-register --recursive --watch --inspect-brk",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
     "lint": "eslint src test"

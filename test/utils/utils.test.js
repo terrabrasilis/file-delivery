@@ -14,17 +14,13 @@ describe('UTILS service:', () => {
     describe('.readDockerSecret', function () {
       it('should check whether utils is valid or not', async () => {
         const filePath = path.join(__dirname, 'secret_mock.txt')
-        process.env.MY_SECRET_DATA_ENV_VAR = filePath
-
-        const secretMessage = Utils.readDockerSecret(process.env.MY_SECRET_DATA_ENV_VAR)
+        const secretMessage = Utils.readDockerSecret(filePath)
         expect(secretMessage).to.be.eql('That is a very secret message')
       })
 
       it('should return null when file not exists', async () => {
         const filePath = path.join(__dirname, 'secret_mock_notexists.txt')
-        process.env.MY_SECRET_DATA_ENV_VAR = filePath
-
-        const secretMessage = Utils.readDockerSecret(process.env.MY_SECRET_DATA_ENV_VAR)
+        const secretMessage = Utils.readDockerSecret(filePath)
         expect(secretMessage).to.not.be.ok
       })
     })

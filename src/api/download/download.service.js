@@ -1,19 +1,26 @@
 import fs from 'fs'
 import tokenService from '../token'
-import {constants} from '../utils'
+import { constants, Utils } from '../utils'
+import config from '../../config'
 
 const Service = {
-  getFilePathBasedOnToken() {
 
+  getFileBasedOnProfile (userType) {
+    switch (userType) {
+      case constants.ADMIN:
+        return this.getPrivateFile()
+      case constants.PUBLIC:
+        return this.getPublicFile()
+      default:
+    }
   },
 
-  getFileStream(filePath) {
-    return fs.createReadStream(filePath)
+  getPublicFile () {
+    return Utils.readDockerSecret(config.publicFilePath)
   },
 
-  isFile(filePath) {
-    const fstat = fs.statSync(filePath)
-    return fstat.isFile()
+  getPrivateFile () {
+    return Utils.readDockerSecret(config.privateFilePath)
   }
 }
 

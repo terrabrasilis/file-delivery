@@ -1,12 +1,26 @@
 import fs from 'fs'
-import path from 'path'
 
 const Utils = {
-  readDockerSecret (path) {
-  	const FILE_EXISTS = fs.existsSync(path)
-	if (!FILE_EXISTS) { return }
-	return fs.readFileSync(path, 'utf8').trim()
+  readDockerSecret (filePath) {
+    if (!filePath) return
+    const FILE_EXISTS = this.isFile(filePath)
+    if (!FILE_EXISTS) return
+    return fs.readFileSync(filePath, 'utf8').trim()
+  },
+
+  getFileStream (filePath) {
+    return fs.createReadStream(filePath)
+  },
+
+  isFile (filePath) {
+    let fileExists = false
+    try {
+      fileExists = fs.statSync(filePath).isFile()
+    } catch (e) { console.error('File', filePath, ' does not exists') }
+
+    return fileExists
   }
+
 }
 
 export default Utils
