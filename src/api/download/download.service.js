@@ -1,26 +1,13 @@
 import fs from 'fs'
+import path from 'path'
 import tokenService from '../token'
-import { constants, Utils } from '../utils'
+import { Utils } from '../utils'
 import config from '../../config'
 
 const Service = {
-
-  getFileBasedOnProfile (userType) {
-    switch (userType) {
-      case constants.ADMIN:
-        return this.getPrivateFile()
-      case constants.PUBLIC:
-        return this.getPublicFile()
-      default:
-    }
-  },
-
-  getPublicFile () {
-    return Utils.readDockerSecret(config.publicFilePath)
-  },
-
-  getPrivateFile () {
-    return Utils.readDockerSecret(config.privateFilePath)
+  getFileBasedOnProfile (userType, project, frequency) {
+    const fileFrequency = Utils.getFileFrequencyName(userType, frequency)
+    return path.join(config.filesPath, project, fileFrequency)
   }
 }
 

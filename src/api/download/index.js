@@ -3,6 +3,6 @@ import router from 'koa-router'
 
 const download = router()
 
-download.get('/', index)
+download.get('/:projectId/:frequency', index)
 
 export default download

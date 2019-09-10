@@ -25,24 +25,24 @@ const JWT_MALFORMED_TOKEN = 'e1JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7In
 describe('DOWNLOAD api: ', () => {
   it('should return 200 when downloading the file (without any token)', async () => {
     const result = await request(app.listen())
-      .get('/download')
+      .get('/download/deter-amz/daily')
     expect(result.status).to.be.eql(200)
     expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
-    expect(result.header['content-type']).to.be.eql('application/zip')
+    expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
   })
 
   it('should return 200 when downloading the file (VALID_TOKEN)', async () => {
     const result = await request(app.listen())
-      .get('/download')
+      .get('/download/deter-amz/daily')
       .set('Authorization', 'Bearer ' + VALID_TOKEN)
     expect(result.status).to.be.eql(200)
     expect(result.header['user-type']).to.be.eql(constants.ADMIN)
-    expect(result.header['content-type']).to.be.eql('application/zip')
+    expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
   })
 
   it('EXPIRED_TOKEN', async () => {
     const result = await request(app.listen())
-      .get('/download')
+      .get('/download/deter-amz/daily')
       .set('Authorization', 'Bearer ' + EXPIRED_TOKEN)
     expect(result.status).to.be.eql(401)
     expect(result.body).to.be.eql({ error: 'jwt expired' })
@@ -50,7 +50,7 @@ describe('DOWNLOAD api: ', () => {
 
   it('INVALID_SIGNATURE_TOKEN', async () => {
     const result = await request(app.listen())
-      .get('/download')
+      .get('/download/deter-amz/daily')
       .set('Authorization', 'Bearer ' + INVALID_SIGNATURE_TOKEN)
     expect(result.status).to.be.eql(401)
     expect(result.body).to.be.eql({ error: 'invalid signature' })
@@ -58,7 +58,7 @@ describe('DOWNLOAD api: ', () => {
 
   it('INVALID_TOKEN', async () => {
     const result = await request(app.listen())
-      .get('/download')
+      .get('/download/deter-amz/daily')
       .set('Authorization', 'Bearer ' + INVALID_TOKEN)
     expect(result.status).to.be.eql(401)
     expect(result.body).to.be.eql({ error: 'invalid token' })
@@ -66,7 +66,7 @@ describe('DOWNLOAD api: ', () => {
 
   it('JWT_MALFORMED_TOKEN', async () => {
     const result = await request(app.listen())
-      .get('/download')
+      .get('/download/deter-amz/daily')
       .set('Authorization', 'Bearer ' + INVALID_TOKEN)
     expect(result.status).to.be.eql(401)
     expect(result.body).to.be.eql({ error: 'invalid token' })
