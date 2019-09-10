@@ -80,6 +80,26 @@ Gets the file based on the Json Web Token that are sent in the requisition.
 
 ```
 
+# Deploy Info
+
+### Build and Run your image
+From your Node.js app project folder launch those commands:
+
+```bash
+$ docker build -t file-delivery .
+$ docker run file-delivery
+```
+
+## Useful commands
+
+Command | Description
+--------|------------
+```$ docker exec -it <container-id> pm2 monit``` | Monitoring CPU/Usage of each process
+```$ docker exec -it <container-id> pm2 list``` | Listing managed processes
+```$ docker exec -it <container-id> pm2 show``` | Get more information about a process
+```$ docker exec -it <container-id> pm2 reload all``` | 0sec downtime reload all applications
+
+
 ## License
 
 MIT © [Paulo Luan](http://terrabrasilis.dpi.inpe.br)
