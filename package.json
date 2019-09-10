@@ -1,6 +1,6 @@
 {
-  "name": "deter-auth",
-  "description": "REST microservice for deter-auth",
+  "name": "file-delivery",
+  "description": "REST microservice for file-delivery",
   "license": "MIT",
   "version": "0.0.1",
   "main": "index.js",
