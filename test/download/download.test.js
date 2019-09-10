@@ -23,21 +23,88 @@ const JWT_MALFORMED_TOKEN = 'e1JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7In
   'hbWUiOiJNci4gTGVib3dza2kifSwiZXhwIjoxNTA0OTkxODIxLCJpYXQiOjE1MDQ5OTE4MjJ9'
 
 describe('DOWNLOAD api: ', () => {
-  it('should return 200 when downloading the file (without any token)', async () => {
-    const result = await request(app.listen())
-      .get('/download/deter-amz/daily')
-    expect(result.status).to.be.eql(200)
-    expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
-    expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+  describe('DETER-AMZ', () => {
+    describe('PUBLIC', () => {
+      it('should return 200 when downloading daily the file (without any token)', async () => {
+        const result = await request(app.listen()).get('/download/deter-amz/daily')
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-amz daily public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+
+      it('should return 200 when downloading the monthly file (without any token)', async () => {
+        const result = await request(app.listen()).get('/download/deter-amz/monthly')
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-amz monthly public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+    })
+
+    describe('AUTHENTICATED', () => {
+      it('should return 200 when downloading the file (VALID_TOKEN)', async () => {
+        const result = await request(app.listen())
+          .get('/download/deter-amz/daily')
+          .set('Authorization', 'Bearer ' + VALID_TOKEN)
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-amz daily public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.ADMIN)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+
+      it('should return 200 when downloading the file (VALID_TOKEN)', async () => {
+        const result = await request(app.listen())
+          .get('/download/deter-amz/monthly')
+          .set('Authorization', 'Bearer ' + VALID_TOKEN)
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-amz monthly public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.ADMIN)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+    })
   })
 
-  it('should return 200 when downloading the file (VALID_TOKEN)', async () => {
-    const result = await request(app.listen())
-      .get('/download/deter-amz/daily')
-      .set('Authorization', 'Bearer ' + VALID_TOKEN)
-    expect(result.status).to.be.eql(200)
-    expect(result.header['user-type']).to.be.eql(constants.ADMIN)
-    expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+  describe('DETER-CERRADO', () => {
+    describe('PUBLIC', () => {
+      it('should return 200 when downloading daily the file (without any token)', async () => {
+        const result = await request(app.listen()).get('/download/deter-cerrado/daily')
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-cerrado daily public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+
+      it('should return 200 when downloading the monthly file (without any token)', async () => {
+        const result = await request(app.listen()).get('/download/deter-cerrado/monthly')
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-cerrado monthly public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+    })
+
+    describe('AUTHENTICATED', () => {
+      it('should return 200 when downloading the file (VALID_TOKEN)', async () => {
+        const result = await request(app.listen())
+          .get('/download/deter-cerrado/daily')
+          .set('Authorization', 'Bearer ' + VALID_TOKEN)
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-cerrado daily public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.ADMIN)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+
+      it('should return 200 when downloading the file (VALID_TOKEN)', async () => {
+        const result = await request(app.listen())
+          .get('/download/deter-cerrado/monthly')
+          .set('Authorization', 'Bearer ' + VALID_TOKEN)
+        expect(result.status).to.be.eql(200)
+        expect(result.body).to.be.eql({ "data": "deter-cerrado monthly public file!" })
+        expect(result.header['user-type']).to.be.eql(constants.ADMIN)
+        expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
+      })
+    })
   })
 
   it('EXPIRED_TOKEN', async () => {
