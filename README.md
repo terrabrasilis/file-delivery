@@ -98,7 +98,8 @@ Command | Description
 ```$ docker exec -it <container-id> pm2 list``` | Listing managed processes
 ```$ docker exec -it <container-id> pm2 show``` | Get more information about a process
 ```$ docker exec -it <container-id> pm2 reload all``` | 0sec downtime reload all applications
-
+```$ docker exec -it <container-id> pm2 logs --format``` | see all applications logs
+```$ docker exec -it <container-id> pm2 flush``` | flush applications logs
 
 ## License
 
