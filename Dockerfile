@@ -13,8 +13,13 @@ ENV NPM_CONFIG_LOGLEVEL warn
 RUN npm install --production
 RUN npm install pm2 -g
 RUN pm2 install pm2-server-monit
+RUN pm2 install pm2-logrotate
+
+EXPOSE 9000
+ENV FILES_PATH /data/files
+VOLUME ["${FILES_PATH}","/logs"]
 
 # Show current folder structure in logs
 RUN ls -al -R
 
-CMD ["pm2-runtime", "--env", "production", "start", "pm2.json", "--web"]
+CMD ["pm2-runtime", "--env", "production", "start", "pm2.json", "--web", "-l", "/logs/out.log"]
