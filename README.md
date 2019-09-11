@@ -87,7 +87,7 @@ From your Node.js app project folder launch those commands:
 
 ```bash
 $ docker build -t file-delivery .
-$ docker run file-delivery
+$ docker run -p 9000:9000 file-delivery
 ```
 
 ## Useful commands
