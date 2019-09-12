@@ -16,12 +16,14 @@ const Service = {
 
     set(files, `${constants.PUBLIC}`, {
       daily: 'daily_d.json',
-      monthly: 'month_d.json'
+      monthly: 'month_d.json',
+      shape: 'public.zip'
     })
 
     set(files, `${constants.ADMIN}`, {
       daily: 'daily_auth_d.json',
-      monthly: 'month_auth_d.json'
+      monthly: 'month_auth_d.json',
+      shape: 'all.zip'
     })
 
     return get(files, `${profile}.${frequency}`)
