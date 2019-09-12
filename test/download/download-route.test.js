@@ -4,6 +4,12 @@ import path from 'path'
 import AdmZip from 'adm-zip'
 import { constants } from '../../src/api/utils'
 import app from '../../src/server'
+import sinon from 'sinon'
+import moment from 'moment'
+
+const now = moment('2019-09-12').toDate()
+let clock
+
 
 const VALID_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoidGhlZHVkZSIsIm5' +
   'hbWUiOiJNci4gTGVib3dza2kifSwiZXhwIjo0NjU4NTkxNzEzLCJpYXQiOjE1MDQ5OTE3MTN9.nZqc6O' +
@@ -25,12 +31,25 @@ const JWT_MALFORMED_TOKEN = 'e1JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7In
   'hbWUiOiJNci4gTGVib3dza2kifSwiZXhwIjoxNTA0OTkxODIxLCJpYXQiOjE1MDQ5OTE4MjJ9'
 
 describe('DOWNLOAD api: ', () => {
+  beforeEach(() => {
+    clock = sinon.useFakeTimers(now.getTime())
+  })
+
+  afterEach(() => {
+    clock.restore()
+  })
+
   describe('DETER-AMZ', () => {
     describe('PUBLIC', () => {
       it('should return 200 when downloading daily the file (without any token)', async () => {
         const result = await request(app.listen()).get('/download/deter-amz/daily')
         expect(result.status).to.be.eql(200)
         expect(result.body).to.be.eql({ data: 'deter-amz daily public file!' })
+
+        console.log('=======================')
+        console.log(JSON.stringify(result.header))
+        console.log('=======================')
+
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
       })
