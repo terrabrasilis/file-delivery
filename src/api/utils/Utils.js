@@ -1,5 +1,4 @@
 import fs from 'fs'
-import { get, set } from 'lodash'
 import constants from './constants'
   
 const Utils = {
@@ -12,18 +11,6 @@ const Utils = {
 
   getFileStream(filePath) {
     return fs.createReadStream(filePath)
-  },
-
-  getFileFrequencyName(profile, frequency) {
-    let files = {}
-    const baseFrequencyJson = {
-      daily: 'daily_d.json',
-      monthly: 'month_d.json'
-    }
-    set(files, `${constants.PUBLIC}`, baseFrequencyJson)
-    set(files, `${constants.ADMIN}`, baseFrequencyJson)
-
-    return get(files, `${profile}.${frequency}`)
   },
 
   isFile(filePath) {
