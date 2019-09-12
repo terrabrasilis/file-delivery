@@ -1,4 +1,4 @@
-# file-delivery [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# file-delivery [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url][![standard][standard-image]][standard-url]
 > 
 
 ## NODE VERSION
@@ -111,3 +111,5 @@ MIT © [Paulo Luan](http://terrabrasilis.dpi.inpe.br)
 [daviddm-url]: https://david-dm.org/terrabrasilis/file-delivery
 [coveralls-image]: https://coveralls.io/repos/github/Terrabrasilis/file-delivery/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/Terrabrasilis/file-delivery?branch=master
+[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
+[standard-url]: http://npm.im/standard
