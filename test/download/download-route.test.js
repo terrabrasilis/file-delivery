@@ -10,7 +10,6 @@ import moment from 'moment'
 const now = moment('2019-09-12').toDate()
 let clock
 
-
 const VALID_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoidGhlZHVkZSIsIm5' +
   'hbWUiOiJNci4gTGVib3dza2kifSwiZXhwIjo0NjU4NTkxNzEzLCJpYXQiOjE1MDQ5OTE3MTN9.nZqc6O' +
   'SdccIx4NXovqqHW5iXAyIsPhEkT2SiwyW1LvU'
@@ -46,10 +45,8 @@ describe('DOWNLOAD api: ', () => {
         expect(result.status).to.be.eql(200)
         expect(result.body).to.be.eql({ data: 'deter-amz daily public file!' })
 
-        console.log('=======================')
-        console.log(JSON.stringify(result.header))
-        console.log('=======================')
-
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-amz-daily_d-2019Set12.json')
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
       })
@@ -57,6 +54,8 @@ describe('DOWNLOAD api: ', () => {
       it('should return 200 when downloading the monthly file (without any token)', async () => {
         const result = await request(app.listen()).get('/download/deter-amz/monthly')
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-amz-month_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-amz monthly public file!' })
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -69,6 +68,8 @@ describe('DOWNLOAD api: ', () => {
           .parse(binaryParser)
 
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-amz-public-2019Set12.zip')
         expect(result.header['content-type']).to.be.eql('application/zip')
         expect(result.status).to.be.eql(200)
         expect(getZipContentAsText(result.body)).to.be.eql('deter-amz public shape file!')
@@ -81,6 +82,8 @@ describe('DOWNLOAD api: ', () => {
           .get('/download/deter-amz/daily')
           .set('Authorization', 'Bearer ' + VALID_TOKEN)
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-amz-daily_auth_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-amz daily authenticated file!' })
         expect(result.header['user-type']).to.be.eql(constants.ADMIN)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -91,6 +94,8 @@ describe('DOWNLOAD api: ', () => {
           .get('/download/deter-amz/monthly')
           .set('Authorization', 'Bearer ' + VALID_TOKEN)
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-amz-month_auth_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-amz monthly authenticated file!' })
         expect(result.header['user-type']).to.be.eql(constants.ADMIN)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -104,6 +109,8 @@ describe('DOWNLOAD api: ', () => {
           .parse(binaryParser)
 
         expect(result.header['user-type']).to.be.eql(constants.ADMIN)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-amz-all-2019Set12.zip')
         expect(result.header['content-type']).to.be.eql('application/zip')
         expect(result.status).to.be.eql(200)
         expect(getZipContentAsText(result.body)).to.be.eql('deter-amz authenticated shape file!')
@@ -116,6 +123,8 @@ describe('DOWNLOAD api: ', () => {
       it('should return 200 when downloading daily the file (without any token)', async () => {
         const result = await request(app.listen()).get('/download/deter-cerrado/daily')
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-cerrado-daily_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-cerrado daily public file!' })
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -124,6 +133,8 @@ describe('DOWNLOAD api: ', () => {
       it('should return 200 when downloading the monthly file (without any token)', async () => {
         const result = await request(app.listen()).get('/download/deter-cerrado/monthly')
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-cerrado-month_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-cerrado monthly public file!' })
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -136,6 +147,8 @@ describe('DOWNLOAD api: ', () => {
           .parse(binaryParser)
 
         expect(result.header['user-type']).to.be.eql(constants.PUBLIC)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-cerrado-public-2019Set12.zip')
         expect(result.header['content-type']).to.be.eql('application/zip')
         expect(result.status).to.be.eql(200)
         expect(getZipContentAsText(result.body)).to.be.eql('deter-cerrado public shape file!')
@@ -148,6 +161,8 @@ describe('DOWNLOAD api: ', () => {
           .get('/download/deter-cerrado/daily')
           .set('Authorization', 'Bearer ' + VALID_TOKEN)
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-cerrado-daily_auth_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-cerrado daily authenticated file!' })
         expect(result.header['user-type']).to.be.eql(constants.ADMIN)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -158,6 +173,8 @@ describe('DOWNLOAD api: ', () => {
           .get('/download/deter-cerrado/monthly')
           .set('Authorization', 'Bearer ' + VALID_TOKEN)
         expect(result.status).to.be.eql(200)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-cerrado-month_auth_d-2019Set12.json')
         expect(result.body).to.be.eql({ data: 'deter-cerrado monthly authenticated file!' })
         expect(result.header['user-type']).to.be.eql(constants.ADMIN)
         expect(result.header['content-type']).to.be.eql('application/json; charset=utf-8')
@@ -171,6 +188,8 @@ describe('DOWNLOAD api: ', () => {
           .parse(binaryParser)
 
         expect(result.header['user-type']).to.be.eql(constants.ADMIN)
+        const fileName = result.header['content-disposition'].split('=')[1]
+        expect(fileName).to.be.eql('deter-cerrado-all-2019Set12.zip')
         expect(result.header['content-type']).to.be.eql('application/zip')
         expect(result.status).to.be.eql(200)
         expect(getZipContentAsText(result.body)).to.be.eql('deter-cerrado authenticated shape file!')
