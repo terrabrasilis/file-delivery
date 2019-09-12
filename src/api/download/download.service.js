@@ -13,12 +13,16 @@ const Service = {
 
   getFileFrequencyName(profile, frequency) {
     let files = {}
-    const baseFrequencyJson = {
+
+    set(files, `${constants.PUBLIC}`, {
       daily: 'daily_d.json',
       monthly: 'month_d.json'
-    }
-    set(files, `${constants.PUBLIC}`, baseFrequencyJson)
-    set(files, `${constants.ADMIN}`, baseFrequencyJson)
+    })
+
+    set(files, `${constants.ADMIN}`, {
+      daily: 'daily_auth_d.json',
+      monthly: 'month_auth_d.json'
+    })
 
     return get(files, `${profile}.${frequency}`)
   },
