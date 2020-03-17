@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY package.json .
 ENV NPM_CONFIG_LOGLEVEL warn
-RUN npm install -g yarn
+RUN npm install -g yarn --force
 RUN yarn install --production
 
 COPY . .
