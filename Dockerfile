@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY package.json .
 ENV NPM_CONFIG_LOGLEVEL warn
-RUN npm install -g yarn
+RUN npm install -g yarn --force
 RUN yarn install --production
 
 COPY . .
@@ -24,4 +24,4 @@ VOLUME ["${FILES_PATH}","/logs"]
 # Show current folder structure in logs
 RUN ls -al -R
 
-CMD ["pm2-runtime", "--env", "production", "start", "pm2.json", "--web"]
+CMD ["pm2-runtime", "--env", "production", "start", "pm2.json"]

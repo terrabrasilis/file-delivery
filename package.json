@@ -2,7 +2,7 @@
   "name": "file-delivery",
   "description": "REST microservice for file-delivery",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "main": "index.js",
   "dependencies": {
     "@koa/cors": "3",
@@ -22,7 +22,8 @@
     "koa-mount": "^4.0.0",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "sync-request": "^6.1.0"
   },
   "devDependencies": {
     "adm-zip": "^0.4.13",
