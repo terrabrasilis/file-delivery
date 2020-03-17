@@ -15,25 +15,13 @@ export default function configKoa (app) {
     strict: false
   }))
 
-  app.use(jwt({
-    secret: config.secret,
-    passthrough: true
-  }))
-
-  app.use((ctx, next) => {
-    const error = get(ctx, 'state.jwtOriginalError.message')
-    const IS_FORBIDDEN = includes(error, 'invalid') || includes(error, 'expired')
-
-    if (IS_FORBIDDEN) {
-      ctx.status = 401
-      ctx.body = { error }
-      return
-    }
-
+   app.use((ctx, next) => {
+    
     ctx.body = ctx.request.body
+    
     return next()
   })
-
+  
   app.on('error', err => console.error(err))
 
   app.use(morgan(config.logType))

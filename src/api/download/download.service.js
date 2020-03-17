@@ -1,6 +1,4 @@
-import fs from 'fs'
 import path from 'path'
-import tokenService from '../token'
 import { get, set } from 'lodash'
 import { constants } from '../utils'
 import config from '../../config'
@@ -20,7 +18,7 @@ const Service = {
       shape: 'public.zip'
     })
 
-    set(files, `${constants.ADMIN}`, {
+    set(files, `${constants.AUTHENTICATED}`, {
       daily: 'daily_auth_d.json',
       monthly: 'month_auth_d.json',
       shape: 'all.zip'
@@ -28,6 +26,42 @@ const Service = {
 
     return get(files, `${profile}.${frequency}`)
   },
+ 
+  requestToAuthApi(resource, bearer) 
+  {
+    var url = 'http://terrabrasilis.dpi.inpe.br/oauth-api/validate/'+resource;
+         
+    var request = require('sync-request');
+    var res = request('GET', url, {
+      headers: {
+        'Authorization': bearer,
+      },
+    });
+
+    return res.getBody();
+      
+  },
+  validateUser(resource, bearer) 
+  {
+    try {
+        const json = Service.requestToAuthApi(resource, bearer);
+
+        let user = JSON.parse(json);
+
+        if(user.authenticated==true)
+        {
+          return true;
+        }
+        else
+        {
+          console.log('Error validating user over oauth-api: ' + user.error);          
+          return false;
+        }
+    } catch (error) {
+        console.error('Error requesting validation of user over oauth-api:' + error);
+        return false;
+    }
+  }
 
 }
 

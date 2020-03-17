@@ -1,5 +1,5 @@
 const Constants = {
-  ADMIN: 'admin',
+  AUTHENTICATED: 'authenticated',
   PUBLIC: 'public'
 }
 
