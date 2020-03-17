@@ -31,7 +31,7 @@ const Controller = {
     const project = get(ctx, 'params.projectId')
     const frequency = get(ctx, 'params.frequency')
     
-    const filePath = service.getFileBasedOnProfile(userProfile, project, frequency)
+    const filePath = Service.getFileBasedOnProfile(userProfile, project, frequency)
     const FILE_IS_VALID = Utils.isFile(filePath)
     if (!FILE_IS_VALID) return ctx.body({ error: 'Sorry, we had a problem serving the file' })
 
