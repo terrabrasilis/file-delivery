@@ -5,7 +5,6 @@ import path from 'path'
 
 import moment from 'moment'
 import service from './download.service'
-import Service from './download.service'
 moment.locale('pt-BR')
 const extname = path.extname
 
