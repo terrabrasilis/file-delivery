@@ -33,7 +33,11 @@ const Controller = {
     
     const filePath = Service.getFileBasedOnProfile(userProfile, project, frequency)
     const FILE_IS_VALID = Utils.isFile(filePath)
-    if (!FILE_IS_VALID) return ctx.body({ error: 'Sorry, we had a problem serving the file' })
+    if (!FILE_IS_VALID)
+    {
+      ctx.body = { error: 'Sorry, we had a problem serving the file' };
+      return;
+    } 
 
     ctx.set('Content-disposition', 'attachment; filename=' + Controller.createFileName(project, filePath))
     ctx.type = extname(filePath)
