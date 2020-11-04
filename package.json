@@ -2,7 +2,7 @@
   "name": "file-delivery",
   "description": "REST microservice for file-delivery",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "dependencies": {
     "@koa/cors": "3",

@@ -10,7 +10,13 @@ import { get, includes } from 'lodash'
 
 export default function configKoa (app) {
   app.use(compress())
-  app.use(cors())
+  app.use(cors(
+    {
+      origin: '*',
+      credentials: false,
+      exposedHeaders: '*'
+    }
+  ))
   app.use(parser({
     strict: false
   }))
