@@ -15,12 +15,16 @@ const Service = {
     set(files, `${constants.PUBLIC}`, {
       daily: 'daily_d.json',
       monthly: 'month_d.json',
+      all_daily: 'all_daily_d.json',
+      cloud: 'cloud_m_d.json',
       shape: 'public.zip'
     })
 
     set(files, `${constants.AUTHENTICATED}`, {
       daily: 'daily_auth_d.json',
       monthly: 'month_auth_d.json',
+      all_daily: 'all_daily_auth_d.json',
+      cloud: 'cloud_m_d.json',
       shape: 'all.zip'
     })
 
