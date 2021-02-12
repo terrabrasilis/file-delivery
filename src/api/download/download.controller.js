@@ -40,6 +40,8 @@ const Controller = {
     } 
 
     ctx.set('Content-disposition', 'attachment; filename=' + Controller.createFileName(project, filePath))
+    ctx.set("Access-Control-Allow-Origin", '*');
+    ctx.set("Access-Control-Expose-Headers",'Content-Disposition');
     ctx.type = extname(filePath)
     ctx.append('user-type', userProfile)
     ctx.body = Utils.getFileStream(filePath)
