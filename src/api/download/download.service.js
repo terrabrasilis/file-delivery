@@ -17,6 +17,8 @@ const Service = {
       monthly: 'month_d.json',
       all_daily: 'all_daily_d.json',
       cloud: 'cloud_m_d.json',
+      fof_prodes: 'fof_prodes_d.json',
+      fof_car: 'fof_car_d.json',
       shape: 'public.zip'
     })
 
@@ -25,6 +27,8 @@ const Service = {
       monthly: 'month_auth_d.json',
       all_daily: 'all_daily_auth_d.json',
       cloud: 'cloud_m_d.json',
+      fof_prodes: 'fof_prodes_d.json',
+      fof_car: 'fof_car_d.json',
       shape: 'all.zip'
     })
 
