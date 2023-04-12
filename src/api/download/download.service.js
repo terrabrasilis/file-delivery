@@ -14,7 +14,7 @@ const Service = {
 
     set(files, `${constants.PUBLIC}`, {
       monthly: 'month_d.json',
-      all_daily: 'all_daily_d.json',
+      all_daily: 'all_daily_d.csv',
       cloud: 'cloud_m_d.json',
       fof_prodes: 'fof_prodes_d.json',
       fof_car: 'fof_car_d.json',
@@ -23,7 +23,7 @@ const Service = {
 
     set(files, `${constants.AUTHENTICATED}`, {
       monthly: 'month_auth_d.json',
-      all_daily: 'all_daily_auth_d.json',
+      all_daily: 'all_daily_auth_d.csv',
       cloud: 'cloud_m_d.json',
       fof_prodes: 'fof_prodes_d.json',
       fof_car: 'fof_car_d.json',
