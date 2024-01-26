@@ -23,7 +23,8 @@
     "koa-router": "^7.4.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "sync-request": "^6.1.0"
+    "sync-request": "^6.1.0",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "adm-zip": "^0.4.13",

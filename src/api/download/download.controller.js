@@ -18,7 +18,7 @@ const Controller = {
 
     if(bearer)
     {
-      if(Service.validateUser(resource, bearer))
+      if(Service.validateUser(ctx, resource, bearer))
       {
         userProfile = constants.AUTHENTICATED;
       }

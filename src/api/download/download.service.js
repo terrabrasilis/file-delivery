@@ -14,7 +14,7 @@ const Service = {
 
     set(files, `${constants.PUBLIC}`, {
       monthly: 'month_d.json',
-      all_daily: 'all_daily_d.csv',
+      all_daily: 'all_daily_d.json',
       cloud: 'cloud_m_d.json',
       fof_prodes: 'fof_prodes_d.json',
       fof_car: 'fof_car_d.json',
@@ -23,7 +23,7 @@ const Service = {
 
     set(files, `${constants.AUTHENTICATED}`, {
       monthly: 'month_auth_d.json',
-      all_daily: 'all_daily_auth_d.csv',
+      all_daily: 'all_daily_auth_d.json',
       cloud: 'cloud_m_d.json',
       fof_prodes: 'fof_prodes_d.json',
       fof_car: 'fof_car_d.json',
@@ -33,9 +33,21 @@ const Service = {
     return get(files, `${profile}.${frequency}`)
   },
  
-  requestToAuthApi(resource, bearer) 
+  requestToAuthApi(ctx, resource, bearer) 
   {
-    var url = 'http://terrabrasilis.dpi.inpe.br/oauth-api/validate/'+resource;
+    var url = 'https://terrabrasilis.dpi.inpe.br/oauth-api/validate/'+resource;
+
+    if(config.oauthAPIURL)
+    {
+      url = config.oauthAPIURL + 'validate/'+resource;
+    }
+    else if(ctx.origin)
+    {
+      url = ctx.origin + '/oauth-api/validate/'+resource;
+    }    
+
+    console.log('OAuth API URL: ' + url);    
+    //var ip = req.headers || req.socket.remoteAddress
          
     var request = require('sync-request');
     var res = request('GET', url, {
@@ -47,10 +59,12 @@ const Service = {
     return res.getBody();
       
   },
-  validateUser(resource, bearer) 
+  validateUser(ctx, resource, bearer) 
   {
     try {
-        const json = Service.requestToAuthApi(resource, bearer);
+        const json = Service.requestToAuthApi(ctx, resource, bearer);
+
+        console.log('User JSON : ' + json);
 
         let user = JSON.parse(json);
 

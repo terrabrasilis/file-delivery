@@ -8,8 +8,9 @@ const config = {
   env: process.env.NODE_ENV || 'dev',
   health: path.normalize(__dirname + '../../'),
   ip: process.env.IP || '0.0.0.0',
-  port: process.env.PORT || 9000,
-  logType: process.env.LOGTYPE || 'dev'
+  port: process.env.PORT || 9003,
+  logType: process.env.LOGTYPE || 'dev',
+  oauthAPIURL:  process.env.OAUTH_API_URL
 }
 
 module.exports = config
