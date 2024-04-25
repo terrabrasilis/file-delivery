@@ -9,6 +9,7 @@ const app = require('./src/server');
 if (!module.parent) {
   app.listen(config.port, config.ip, () => {
     console.log(`Koa server listening on ${config.ip}:${config.port}, in ${config.env} mode`);
+    console.log(`OAuth API URL: ${config.oauthAPIURL}` )
   });
 } else {
   module.exports = app;
