@@ -1,9 +1,10 @@
 import assert from 'assert'
 import { get } from 'lodash'
-import { constants, Utils } from '../utils'
 import path from 'path'
+import { constants, Utils } from '../utils'
 
 import moment from 'moment'
+import config from '../../config'
 import Service from './download.service'
 moment.locale('pt-BR')
 const extname = path.extname
@@ -13,8 +14,8 @@ const Controller = {
   index (ctx, next) {
 
     const bearer = ctx.request.headers.authorization; 
-    let userProfile = constants.PUBLIC;
-    let resource = 'file-delivery';
+    let userProfile = constants.PUBLIC;    
+    let resource = config.oauthAPIRole;
 
     if(bearer)
     {

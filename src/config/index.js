@@ -1,5 +1,4 @@
 import path from 'path'
-import {Utils} from '../api/utils'
 
 const TEMPORARY_TEST_PUBLIC_PATH = path.join(__dirname, '../../test/files_mock/') 
 
@@ -10,7 +9,8 @@ const config = {
   ip: process.env.IP || '0.0.0.0',
   port: process.env.PORT || 9003,
   logType: process.env.LOGTYPE || 'dev',
-  oauthAPIURL:  process.env.OAUTH_API_URL
+  oauthAPIURL:  process.env.OAUTH_API_URL,
+  oauthAPIRole:  process.env.OAUTH_API_ROLE
 }
 
 module.exports = config
