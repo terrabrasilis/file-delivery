@@ -15,16 +15,25 @@ const Controller = {
 
     const bearer = ctx.request.headers.authorization; 
     let userProfile = constants.PUBLIC;    
-    let resource = config.oauthAPIRole;
+    let clientId = config.oauthAPIClientId;
+    let role = config.oauthAPIRole;
 
-    if(bearer)
+    if(clientId && role)
     {
-      if(Service.validateUser(ctx, resource, bearer))
+      if(bearer)
       {
-        userProfile = constants.AUTHENTICATED;
+        if(Service.validateUser(ctx, clientId, role, bearer))
+        {
+          userProfile = constants.AUTHENTICATED;
+        }
       }
+      Controller.processResponse(ctx, userProfile);
     }
-    Controller.processResponse(ctx, userProfile);
+    else
+    {
+      ctx.body = { error: 'Missing clientId or role configuration!' };
+      return;
+    }
   },
 
   processResponse(ctx, userProfile)

@@ -10,7 +10,8 @@ const config = {
   port: process.env.PORT || 9003,
   logType: process.env.LOGTYPE || 'dev',
   oauthAPIURL:  process.env.OAUTH_API_URL,
-  oauthAPIRole:  process.env.OAUTH_API_ROLE
+  oauthAPIRole:  process.env.OAUTH_API_ROLE,
+  oauthAPIClientId: process.env.OAUTH_API_CLIENT_ID
 }
 
 module.exports = config

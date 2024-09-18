@@ -1,7 +1,7 @@
-import path from 'path'
 import { get, set } from 'lodash'
-import { constants } from '../utils'
+import path from 'path'
 import config from '../../config'
+import { constants } from '../utils'
 
 const Service = {
   getFileBasedOnProfile (userType, project, frequency) {
@@ -33,17 +33,17 @@ const Service = {
     return get(files, `${profile}.${frequency}`)
   },
  
-  requestToAuthApi(ctx, resource, bearer) 
+  requestToAuthApi(ctx, clientId, role, bearer) 
   {
-    var url = 'https://terrabrasilis.dpi.inpe.br/oauth-api/validate/'+resource;
+    var url = 'https://terrabrasilis.dpi.inpe.br/oauth-api/validate/'+clientId+'/'+role;
 
     if(config.oauthAPIURL)
     {
-      url = config.oauthAPIURL + 'validate/'+resource;
+      url = config.oauthAPIURL + 'validate/'+clientId+'/'+role;
     }
     else if(ctx.origin)
     {
-      url = ctx.origin + '/oauth-api/validate/'+resource;
+      url = ctx.origin + '/oauth-api/validate/'+clientId+'/'+role;
     }    
 
     console.log('OAuth API URL: ' + url);    
@@ -59,10 +59,10 @@ const Service = {
     return res.getBody();
       
   },
-  validateUser(ctx, resource, bearer) 
+  validateUser(ctx, clientId, role, bearer) 
   {
     try {
-        const json = Service.requestToAuthApi(ctx, resource, bearer);
+        const json = Service.requestToAuthApi(ctx, clientId, role, bearer);
 
         console.log('User JSON : ' + json);
 
