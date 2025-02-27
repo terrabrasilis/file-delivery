@@ -1,4 +1,6 @@
-import health from './health';
+import deter from './deter';
 import download from './download';
+import health from './health';
 
-export {health, download}
+export { deter, download, health };
+
