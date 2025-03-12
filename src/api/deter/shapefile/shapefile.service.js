@@ -6,6 +6,7 @@ const Service = {
   {
    
     let fileName = project + "_" + userType+".zip";
+    fileName = path.join("shapefile", fileName);
     fileName = path.join(project, fileName);
     return path.join(config.filesPath, fileName)
   },  
