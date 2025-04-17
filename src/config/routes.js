@@ -2,7 +2,7 @@
 
 import mount from 'koa-mount'
 import { download, health } from '../api'
-import { aux, data, shapefile } from '../api/deter'
+import { aux, cloud, data, shapefile } from '../api/deter'
 
 export default function configRoutes (app) {
   app.use(mount('/health', health.routes()))
@@ -14,6 +14,7 @@ export default function configRoutes (app) {
   app.use(mount('/deter/data', data.routes()))
   app.use(mount('/deter/shapefile', shapefile.routes()))
   app.use(mount('/deter/aux', aux.routes()))
+  app.use(mount('/deter/cloud', cloud.routes()))
   console.log("Registering routes");
   // List Endpoints Here
 }
